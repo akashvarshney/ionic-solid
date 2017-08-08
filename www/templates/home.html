@@ -1,14 +1,15 @@
-<ion-view view-title="Playlists">
-  <ion-content>
+<ion-view view-title="S.O.L.I.D">
+  
+  <ion-content>    
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item>
+      <ion-nav-buttons href="#/app/home/design-principle/srp" text="Hello">
+        Hello
+      </ion-nav-buttons>
       <ion-item href="#/app/home/design-principle/srp">SRP</ion-item>
-       <ion-item href="#/app/home/design-principle/ocp">OCP</ion-item>
-        <ion-item href="#/app/home/design-principle/lsp">LSP</ion-item>
-         <ion-item href="#/app/home/design-principle/isp">ISP</ion-item>
-          <ion-item href="#/app/home/design-principle/dip">DIP</ion-item>
+      <ion-item href="#/app/home/design-principle/ocp">OCP</ion-item>
+      <ion-item href="#/app/home/design-principle/lsp">LSP</ion-item>
+      <ion-item href="#/app/home/design-principle/isp">ISP</ion-item>
+      <ion-item href="#/app/home/design-principle/dip">DIP</ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
