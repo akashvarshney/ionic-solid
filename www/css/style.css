@@ -3,3 +3,9 @@
   background-color:#ef473a;
   border-style:none;
 }
+.item-avatar-centered {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
