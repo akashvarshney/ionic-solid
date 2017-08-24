@@ -1,4 +1,33 @@
 <ion-view view-title="Liskov Substitiution Priniciple">
   <ion-content>
+    <div class="item item-divider">
+      <h2 style="text-align: center;">LSP: Liskov Substitiution Principle</h2>
+    </div>
+    <div class="item item-text-wrap ">
+      <p>The Liskov substitution principle (LSP) is a collection of guidelines for creating inheritance hierarchies in which
+        a client can reliably use any class or subclass without compromising the expected behavior.</p><br>
+      <p>If the rules of the LSP are not followed, an extension to a class hierarchy—that is, a new subclass— might necessitate
+        changes to any client of the base class or interface. If the LSP is followed, clients can remain unaware of changes
+        to the class hierarchy. As long as there are no changes to the interface, there should be no reason to change any
+        existing code. The LSP, therefore, helps to enforce both the open/closed principle and the single responsibility
+        principle.
+      </p>
+      <p><b>Formal definition</b><br> The definition of the LSP by prominent computer scientist Barbara Liskov is a bit dry,
+        so it requires further explanation. Here is the official definition.
+      </p><br>
+      <p><em>If S is a subtype of T, then objects of type T may be replaced with objects of type S,
+              without breaking the program.
+             <sub> —Barbara Liskov</sub></em></p><br>
+      <p>
+          There are three code ingredients relating to the LSP:<br>
+          <b>Base type</b> The type (T) that clients have reference to. Clients call various methods, any of
+          which can be overridden—or partially specialized—by the subtype.<br>
+          <b>Subtype</b> Any one of a possible family of classes (S) that inherit from the base type (T).
+          Clients should not know which specific subtype they are calling, nor should they need to.
+          The client should behave the same regardless of the subtype instance that it is given.<br>
+          <b>Context</b> The way in which the client interacts with the subtype. If the client doesn’t interact
+          with a subtype, the LSP can neither be honored nor contravened.
+      </p>
+    </div>
   </ion-content>
 </ion-view>
