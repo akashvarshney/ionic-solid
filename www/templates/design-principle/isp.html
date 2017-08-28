@@ -13,6 +13,16 @@
         from the customers and places them in the system for dispatch and further processing. The orders can be accepted
         through various channels such as an ecommerce website, telephone and cash on delivery.To deal with this kind of processing
         you created the following abstract class:</p><br>
+    <!-- //TODO:find some easy way to highlight syntax -->
+        <pre><code class="cs hljs">
+    <span class="hljs-meta-keyword">public</span> abstract class OrderProcessor
+    {
+        public abstract bool ValidatePaymentInfo();
+        public abstract bool ValidateShippingAddress();
+        public abstract void ProcessOrder();
+    }
+            </code></pre>
+      
     </div>
   </ion-content>
 </ion-view>
