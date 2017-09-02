@@ -4,6 +4,16 @@
       <h2 style="text-align: center;">ISP: Interface Segregation Priniciple</h2>
     </div>
     <div class="item item-text-wrap ">
+      <h3> Preface</h3>
+      <p>Interfaces represent the boundaries between what client code requires and how that
+          requirement is implemented. The interface segregation principle states that interfaces should be small.
+      </p><br>
+      <p>Unless every client of an interface requires every member, it does not make sense to require every
+          implementation to fulfill such a large contract. Bearing in mind the single responsibility principle
+          and how developers can make liberal use of the Decorator pattern, for every member present in an
+          interface, there needs to be a valid analogy for the decoration being implemented.
+          At their simplest, interfaces contain single methods that serve a single purpose. At this level of
+          granularity, they are akin to delegates, but with many added benefits.</p><br>
 
       <h3>Definition</h3><br>
       <p>No client should be forced to depend on methods it does not use. <br> Many client-specific interfaces are better than
@@ -13,8 +23,8 @@
         from the customers and places them in the system for dispatch and further processing. The orders can be accepted
         through various channels such as an ecommerce website, telephone and cash on delivery.To deal with this kind of processing
         you created the following abstract class:</p><br>
-    <!-- //TODO:find some easy way to highlight syntax -->
-        <pre><code class="cs hljs">
+      <!-- //TODO:find some easy way to highlight syntax -->
+      <pre><code class="cs hljs">
     <span class="hljs-meta-keyword">public</span> abstract class OrderProcessor
     {
         public abstract bool ValidatePaymentInfo();
@@ -22,7 +32,7 @@
         public abstract void ProcessOrder();
     }
             </code></pre>
-      
+
     </div>
   </ion-content>
 </ion-view>
