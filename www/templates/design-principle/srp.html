@@ -13,7 +13,25 @@
             <span>Let’s take a simple example by looking out the below implementation of class </span>
 
             <br> <br>
-
+            <div>
+                <pre>
+                    <code class="cs hljs">
+// Data access class is only responsible for data base related operations 
+class DataAccess 
+{ 
+    public static void InsertData() 
+    { 
+        Console.WriteLine("Data inserted into database successfully"); 
+    } 
+} 
+                </code>
+            </pre>
+            </div>
+                <p> This class is only responsible for the data access operations and it has only one method.If you are thinking it's
+                    following the Single Responsibility Principle  then yes its true. but what if  when we add operations for <b>get,delete or update</b>.
+                    Will it still following the SRP principle . Well Yes !! DataAccess class is responsible for doing operation which are realated to DataAccess.
+                
+                </p>
             <h3>What is a Responsibility?</h3>
             <p>In the context of the Single Responsibility Principle (SRP) we define a responsibility to be “a reason for change.”
                 If you can think of more than one motive for changing a class, then that class has more than one responsibility.
