@@ -13,20 +13,20 @@
             <span>Let’s take a simple example by looking out the below implementation of class </span>
 
             <br> <br>
-            <div>
-                <pre>
-                    <code class="cs hljs">
+<div>
+    <pre>
+        <code class="cs hljs">
 // Data access class is only responsible for data base related operations 
 class DataAccess 
 { 
-    public static void InsertData() 
+    public static void GetUser() 
     { 
-        Console.WriteLine("Data inserted into database successfully"); 
+        Console.WriteLine("Got user from database successfully"); 
     } 
 } 
-                </code>
-            </pre>
-            </div>
+    </code>
+</pre>
+</div>
                 <p> This class is only responsible for the data access operations and it has only one method.If you are thinking it's
                     following the Single Responsibility Principle  then yes its true. but what if  when we add operations for <b>get,delete or update</b>.
                     Will it still following the SRP principle . Well Yes !! DataAccess class is responsible for doing operation which are realated to DataAccess.
@@ -35,14 +35,89 @@ class DataAccess
             <h3>What is a Responsibility?</h3>
             <p>In the context of the Single Responsibility Principle (SRP) we define a responsibility to be “a reason for change.”
                 If you can think of more than one motive for changing a class, then that class has more than one responsibility.
-                This is sometimes hard to see. For example, consider the Modem interface</p>
+                This is sometimes hard to see. To better explain the problem with having classes that hold too many responsibilities, this section
+                explores an example.
+            </p>
             <br>
             <br>
+<div>
+    <pre>
+        <code class="cs hljs">
+public class DataAccess
+{
+    public class GetUser(string userName, string password)
+    {
+        using (var connection = new SqlConnection(…))
+        using (var command = new SqlCommand())
+        {
+            command.CommandTex = “SELECT Id, Name, UserName, Password, DateOfBirth FROM Users where UserName = @UserName and Password = @Password”;
+            command.Parameters.Add(“@UserName”, SqlDbType.VarChar).Value = userName;
+            command.Parameters.Add(“@Password”, SqlDbType.VarChar).Value = password;
+            command.Connection = connection;
+            connection.Open();
+            using (var reader = command.ExecuteReader())
+            {
+            return dr.Read() ? MapUser(dr) : null;
+            }
+        }
+    }
+
+    private User MapUser(IDataReader dr)
+    {
+        return new User
+        {
+            Id = Convert.ToInt32(dr[“Id”]),
+            Name = dr[“Name”].ToString(),
+            UserName = dr[“UserName”].ToString(),
+            Password = dr[“Password”].ToString(),
+            DateOfBirth = Convert.ToDateTime(dr[“DateOfBirth”]),
+        };
+    }
+}
+        </code>
+    </pre>
+</div>
+            <br> <br>
+            <p>
+            We have a violation of our single responsibility principle – DataAccess has two clear and distinct purposes: data access
+             and data mapping. Now, it’s true that data access and data mapping go hand-in-hand, but the unnecessary coupling of logic
+              within a single class makes both functions (access and mapping) unnecessary brittle. By being in the same class, GetUser
+               is tightly coupled to the mapping logic (which makes it more likely to be negatively effected by any changes).
+            </p>
+            <br>
+            <p>
+            The other problem I see people having when it comes to applying SRP is an irrational dislike for having multiple classes 
+            and a fear of object instantiation. At the very least, the solution to our above design problem is to create a new class, 
+            named DataMapper, and create an instance of it from within our DataAccess class. This would provide logical separation 
+            (which is what SRP is concerned about). However, we’d still have tight coupling and would likely consider introducing an 
+            IDataMapper interface and leverage dependency injection (other parts of SOLID focus on those aspects, so we’ll skip the 
+            details for now). The point is that we’d introduce a new type (possibly two), and an extra object instantiation:
+            </p>
+
+        <div>
+            <pre>
+                <code class="cs hljs">
+using (var reader = command.ExecuteReader())
+{
+    return dr.Read() ? new DataMapper().MapUser(dr) : null;
+}
+//or
+using (var reader = command.ExecuteReader())
+{
+    return dr.Read() ? Factory.Create<IDataMapper>().MapUser(dr) : null;
+}
+                </code>
+            </pre>
+        </div>
+        <p>
+            I consider both side effects extremely insignificant (non-existent really) in comparison to what is gained 
+            (readability, maintainability and testability).
+        </p>
             <h3>Conclusion</h3>
             <p>The SRP is one of the simplest of the principles, and one of the hardest to get right. Joining responsibilities
                 is something that we do naturally. Finding and separating those responsibilities from one another is much
-                of what software design is really about. Indeed, the rest of the principles we will discuss come back to
-                this issue in one way or another.
+                of what software design is really about. The reason it is important to keep a class focused on a single concern 
+                is that it makes the class more robust. 
             </p>
         </div>
     </ion-content>
